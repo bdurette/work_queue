@@ -91,9 +91,9 @@ defmodule WorkQueue do
       
       :update_worker_count ->
         case params.opts.update_worker_count.(params, running, max) do
-          {:ok, n} when is_integer(n) and n > max and length(running) < n and n > 0 ->
+          {:ok, n} when n > max and length(running) < n and n > 0 ->
             loop(params, running, n)
-          {:ok, n} when is_integer(n) and n > 0 ->
+          {:ok, n} when n > 0 ->
             wait_for_answers(params, running, n)
         end
         
